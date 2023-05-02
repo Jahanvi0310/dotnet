@@ -13,6 +13,11 @@ namespace eTickets.Models
         [Required]
         public string FullName { get; set; }="";
         public string Bio { get; set; }="";
+        //Relationships between producer and movie
+        //one to many relation
+       public List<Movie>? Movies { get; set; }
+
+   
 
     }
 }
