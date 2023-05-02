@@ -29,3 +29,6 @@
 /Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/obj/Debug/net7.0/eTickets.pdb
 /Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/obj/Debug/net7.0/eTickets.genruntimeconfig.cache
 /Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/obj/Debug/net7.0/ref/eTickets.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.EntityFrameworkCore.Abstractions.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/obj/Debug/net7.0/eTickets.csproj.CopyComplete
