@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using eTickets.Data;
 namespace eTickets.Models
 {
@@ -15,5 +16,22 @@ namespace eTickets.Models
         public DateTime StartDate { get; set; } = DateTime.MinValue;
         public DateTime EndDate { get; set; } = DateTime.MinValue;
     public MovieCategory MovieCategory {get;set;}
+
+    //Relationship 
+    //many to many relationship
+    public List<Actor_Movie>? Actors_Movies { get; set; }
+
+//Cinema
+    //on to many relationship bewteen cinema and movie.to define the cenima join there should be foreign key so as in actor_movie
+//To define foregn key
+public int CinemaId { get; set; }
+[ForeignKey("CinemaId")]
+    public Cinema ?Cinema { get; set; }
+
+
+    //Producer
+    public int ProducerId { get; set; }
+    [ForeignKey("ProducerId")]
+    public Producer?Producer{ get; set; }
     }
 }

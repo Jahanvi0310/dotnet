@@ -9,7 +9,8 @@ namespace eTickets.Models
         public int MovieId { get; set; }
         public  Movie ? Movie { get; set; }
         public int ActorId{ get; set; }
-        public int MyProperty { get; set; }
+        public Actor? Actor { get; set; }
 
     }
 }
+//above table si created for joins
