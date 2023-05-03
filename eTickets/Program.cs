@@ -1,8 +1,29 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using MySqlConnector;
+
 using eTickets.Data;
 var builder = WebApplication.CreateBuilder(args);
+var configuration = new ConfigurationBuilder()
+    .AddJsonFile("appsettings.json")
+    .Build();
 
-// Add services to the container.
-builder.Services.AddDbContext<AppDbContext>();
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    try
+    {
+        options.UseMySql(
+            configuration.GetConnectionString("DefaultConnectionStrings"),
+            new MySqlServerVersion(new Version(8, 0, 26))
+        );
+        Console.WriteLine("connection done");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+});
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
