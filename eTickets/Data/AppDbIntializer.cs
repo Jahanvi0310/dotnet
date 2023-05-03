@@ -308,6 +308,8 @@ new Actor_Movie(){
     MovieId=5
 }
 });
+context.SaveChanges();
+Console.WriteLine("Actor_movies added succefully");
                 }
             }
         }

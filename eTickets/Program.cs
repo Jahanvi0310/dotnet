@@ -46,5 +46,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+    //Seed the database after and app start
+    //if there is no database it will add it
+    AppDbIntializer.Seed(app);
 
 app.Run();
