@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using MySqlConnector;
-
+using eTickets.Models;
 using eTickets.Data;
 var builder = WebApplication.CreateBuilder(args);
 var configuration = new ConfigurationBuilder()
@@ -14,7 +14,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     try
     {
         options.UseMySql(
-            configuration.GetConnectionString("DefaultConnectionStrings"),
+            configuration.GetConnectionString("AppDbContext"),
             new MySqlServerVersion(new Version(8, 0, 26))
         );
         Console.WriteLine("connection done");
@@ -27,6 +27,12 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedData.Initialize(services);
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -48,6 +54,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
     //Seed the database after and app start
     //if there is no database it will add it
-    AppDbIntializer.Seed(app);
+ 
 
 app.Run();
