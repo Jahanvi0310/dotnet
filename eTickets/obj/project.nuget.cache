@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "X3iSChLkQPyPj6hBR9eQN0KVFveqRubuhpY5sVrtPza7Vxs1Uhh5WAIL2FNTpKh5HMQ5PtJWySI/cRHRdR7E8g==",
+  "dgSpecHash": "eTAkRnlbINx2SrLcNPYzPmukBjEuVIKEjQuoT5C5e3H7fooYWhIHdIVR9F0twxkbrhxgYRCr0C/45UZ5PzBQtw==",
   "success": true,
   "projectFilePath": "/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/eTickets.csproj",
   "expectedPackageFiles": [
     "/Users/pulkitanand/.nuget/packages/bouncycastle.netcore/1.8.3/bouncycastle.netcore.1.8.3.nupkg.sha512",
+    "/Users/pulkitanand/.nuget/packages/castle.core/5.1.0/castle.core.5.1.0.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/google.protobuf/3.11.4/google.protobuf.3.11.4.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/humanizer.core/2.14.1/humanizer.core.2.14.1.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/k4os.compression.lz4/1.1.11/k4os.compression.lz4.1.1.11.nupkg.sha512",
@@ -16,6 +17,7 @@
     "/Users/pulkitanand/.nuget/packages/microsoft.entityframeworkcore.abstractions/7.0.5/microsoft.entityframeworkcore.abstractions.7.0.5.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/microsoft.entityframeworkcore.analyzers/7.0.5/microsoft.entityframeworkcore.analyzers.7.0.5.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/microsoft.entityframeworkcore.design/7.0.5/microsoft.entityframeworkcore.design.7.0.5.nupkg.sha512",
+    "/Users/pulkitanand/.nuget/packages/microsoft.entityframeworkcore.proxies/7.0.5/microsoft.entityframeworkcore.proxies.7.0.5.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/microsoft.entityframeworkcore.relational/7.0.5/microsoft.entityframeworkcore.relational.7.0.5.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/microsoft.entityframeworkcore.sqlite/7.0.5/microsoft.entityframeworkcore.sqlite.7.0.5.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/microsoft.entityframeworkcore.sqlite.core/7.0.5/microsoft.entityframeworkcore.sqlite.core.7.0.5.nupkg.sha512",
@@ -59,6 +61,7 @@
     "/Users/pulkitanand/.nuget/packages/system.console/4.0.0/system.console.4.0.0.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/system.diagnostics.debug/4.0.11/system.diagnostics.debug.4.0.11.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/system.diagnostics.diagnosticsource/4.0.0/system.diagnostics.diagnosticsource.4.0.0.nupkg.sha512",
+    "/Users/pulkitanand/.nuget/packages/system.diagnostics.eventlog/6.0.0/system.diagnostics.eventlog.6.0.0.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/system.diagnostics.tools/4.0.1/system.diagnostics.tools.4.0.1.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/system.diagnostics.tracesource/4.0.0/system.diagnostics.tracesource.4.0.0.nupkg.sha512",
     "/Users/pulkitanand/.nuget/packages/system.diagnostics.tracing/4.1.0/system.diagnostics.tracing.4.1.0.nupkg.sha512",
