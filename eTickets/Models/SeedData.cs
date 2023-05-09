@@ -58,7 +58,7 @@ new Cinema()
 new Cinema()
 {
     Name="Cinema6",
-    Logo="https://img.freepik.com/premium-vector/cinema-camera-roll-film-logo-design-template_527727-210.jpg",
+    Logo="https://img.freepik.com/premium-vector/cinema-camera-roll-film-logo-design-template_527727-210.jpgnam",
     Description="This is the description of first cinema6"
 
 }
