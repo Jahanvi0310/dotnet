@@ -7,9 +7,9 @@
 @*write code*@
 <div class="row">
     <div class="col-md-8 offset-md-2">
-<table>
+<table class="table">
     <thead>
-        <tr>
+       <tr class="text-center">
         <th>@Html.DisplayNameFor(model=>model.ProfilePictureUrl)</th>
         <th>@Html.DisplayNameFor(model=>model.FullName)</th>
         <th>@Html.DisplayNameFor(model=>model.Bio)</th>
@@ -17,7 +17,7 @@
     </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+       @foreach (var item in Model ?? Enumerable.Empty<Actor>())
         {
             <tr>
                 <td class="align-middle">
@@ -30,8 +30,8 @@
                     @Html.DisplayFor(modelItem=>item.Bio)
                 </td>
                 <td class="align-middle">
-                    <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit </a>|
-                    <a class="btn btn-outline-Info"><i class="bi bi-eye"></i>Details </a>|
+                    <a class="btn btn-outline-primary"><i class="bi bi-pencil"></i>Edit </a>|
+                    <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a>|
                     <a class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete </a>|
                 </td>
             </tr>

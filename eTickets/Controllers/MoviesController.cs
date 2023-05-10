@@ -15,8 +15,8 @@ public MoviesController(AppDbContext context)
         public async Task <IActionResult> Index()
         {
             //to show the data on index page
-            var data = await _context.Movies!.ToListAsync();
-            return View();
+            var data = await _context.Movies!.Include(n=>n.Cinema).OrderBy(n=>n.Name).ToListAsync();
+            return View(data);
         }
     }
 }
