@@ -15,7 +15,7 @@ public ActorsController(AppDbContext context)
         {
             //to show the data on index page
             var data = _context.Actors!.ToList();
-            return View();
+            return View(data);
         }
     }
 }
