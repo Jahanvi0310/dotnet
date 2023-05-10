@@ -18665,6 +18665,21 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/Views/Movies/Index.cshtml",
+      "TargetPath": "Views\\Movies\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/Views/Producers/Index.cshtml",
+      "TargetPath": "Views\\Producers\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/Views/Cinemas/Index.cshtml",
+      "TargetPath": "Views\\Cinemas\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
       "FileKind": "mvc"

@@ -16,7 +16,7 @@ public CinemasController(AppDbContext context)
         {
             //to show the data on index page
             var data = await _context.Cinemas!.ToListAsync();
-            return View();
+            return View(data);
         }
     }
 }
