@@ -258,6 +258,7 @@ new Movie(){
     MovieCategory=MovieCategory.Horror
 
 }
+
                     });
                 context.SaveChanges();
                 Console.WriteLine("Movies added successfuly");
