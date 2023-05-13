@@ -19,5 +19,11 @@ public ActorsController(IActorsService service)
             var data =await _service.getAll();
             return View(data);
         }
+        //url for creating the actor 
+        //GET://Actors/Create
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }
