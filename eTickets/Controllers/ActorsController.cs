@@ -2,19 +2,21 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using  eTickets.Models;
 using eTickets.Data;
+using eTickets.Data.Services;
+using Microsoft.EntityFrameworkCore;
 namespace eTickets.Controllers
 {
     public class ActorsController:Controller
     {
-        private readonly AppDbContext _context;
-public ActorsController(AppDbContext context)
+        private readonly IActorsService _service;
+public ActorsController(IActorsService service)
 {
-    _context=context;
+    _service=service;
 }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //to show the data on index page
-            var data = _context.Actors!.ToList();
+            var data =await _service.getAll();
             return View(data);
         }
     }
