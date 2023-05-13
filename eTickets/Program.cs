@@ -1,9 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+
 using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using eTickets.Models;
 using eTickets.Data;
+using eTickets.Data.Services;
+using Microsoft.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 var configuration = new ConfigurationBuilder()
     .AddJsonFile("appsettings.json")
@@ -23,8 +26,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     {
         Console.WriteLine(ex.Message);
     }
+    
 });
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IActorsService,ActorsService>();
 
 var app = builder.Build();
 using (var scope = app.Services.CreateScope())
@@ -32,6 +37,7 @@ using (var scope = app.Services.CreateScope())
     var services = scope.ServiceProvider;
 
     SeedData.Initialize(services);
+    
 }
 
 // Configure the HTTP request pipeline.
