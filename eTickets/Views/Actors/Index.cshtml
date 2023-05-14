@@ -4,45 +4,55 @@
     ViewData["Title"] = "List of Actors";
 }
 
-@*write code*@
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-<table class="table">
-    <thead>
-       <tr class="text-center">
-        <th>@Html.DisplayNameFor(model=>model.ProfilePictureUrl)</th>
-        <th>@Html.DisplayNameFor(model=>model.FullName)</th>
-        <th>@Html.DisplayNameFor(model=>model.Bio)</th>
-        <th>Actions</th>
-    </tr>
-    </thead>
-    <tbody>
-       @foreach (var item in Model ?? Enumerable.Empty<Actor>())
-        {
-            <tr>
-                <td class="align-middle">
-                    <img class="rounded-circle" src="@item.ProfilePictureUrl" alt="@item.FullName" style="max-width: 150px;"/>
-                </td>
-                <td class="align-middle">
-                    @Html.DisplayFor(modelItem=>item.FullName)
-                </td>
-                <td class="align-middle">
-                    @Html.DisplayFor(modelItem=>item.Bio)
-                </td>
-                <td class="align-middle">
-                    <a class="btn btn-outline-primary"><i class="bi bi-pencil"></i>Edit </a>|
-                    <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a>|
-                    <a class="btn btn-outline-danger"><i class="bi bi-trash"></i>Delete </a>|
-                </td>
-            </tr>
-        }
-    </tbody>
-    <tr>
-        <td></td>
-    </tr>
-</table>
+<div class="container-fluid">
+    <h1 class="text-center">@ViewData["Title"]</h1>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>ProfilePicture</th>
+                        <th>FullName</th>
+                        <th>Biography</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var actor in Model ?? Enumerable.Empty<Actor>())
+                    {
+                        <tr>
+                            <td>
+                                <img src="@actor.ProfilePictureUrl" class="rounded-circle" alt="@actor.FullName" width="100">
+                            </td>
+                            <td>@actor.FullName</td>
+                            <td>@actor.Bio</td>
+                            <td>
+                                <a href="@Url.Action("Edit", "Actors", new { id = actor.Id })" class="btn btn-sm btn-primary" title="Edit">
+                                    <i class="fas fa-edit"></i>
+                                    Edit
+                                </a>
+                                <a href="@Url.Action("Details", "Actors", new { id = actor.Id })" class="btn btn-sm btn-info" title="Details">
+                                    <i class="fas fa-eye"></i>
+                                    Delete
+                                </a>
+                                <a href="@Url.Action("Delete", "Actors", new { id = actor.Id })" class="btn btn-sm btn-danger" title="Delete">
+                                    <i class="fas fa-trash"></i>
+                                    Details
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
-<div class="text-white" style="position: fixed; right:25px; bottom:25px;">
-<a asp-controller="Actors" asp-action="Create" class="btn btn-success"><i class="bi bi-plus-circle"></i>Add New</a>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <a href="@Url.Action("Create", "Actors")" class="btn btn-success float-right" title="Add New Actor">
+                <i class="fas fa-plus-circle"></i> Add New Actor
+            </a>
+        </div>
+    </div>
 </div>
