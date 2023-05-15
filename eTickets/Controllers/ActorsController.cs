@@ -16,7 +16,7 @@ public ActorsController(IActorsService service)
         public async Task<IActionResult> Index()
         {
             //to show the data on index page
-            var data =await _service.getAll();
+            var data =await _service.GetAllAsync();
             return View(data);
         }
         //url for creating the actor 
@@ -33,9 +33,20 @@ public async Task<IActionResult> Create([Bind("FullName,ProfilePictureUrl,Bio")]
         return View(actor);
     }
 
-     _service.Add(actor);
+     await _service.AddAsync(actor);
 
     return RedirectToAction(nameof(Index));
+}
+public async Task<IActionResult> Details(int id)
+{
+    var actor = await _service.GetByIdAsync(id);
+
+    if (actor == null)
+    {
+        return NotFound();
+    }
+
+    return View(actor);
 }
 
     }
