@@ -13,9 +13,9 @@ Task<Actor?> GetByIdAsync(int Id);
 //to add the actor in database
 Task AddAsync(Actor actor);
 //to update the actor
-Actor Update(int id,Actor newActor);
+Task UpdateAsync(int id,Actor newActor);
 //to delete the actor
-void Delete(int id);
+Task DeleteAsync(int id);
 
     }
 }

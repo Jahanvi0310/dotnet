@@ -48,6 +48,67 @@ public async Task<IActionResult> Details(int id)
 
     return View(actor);
 }
+// GET: Actors/Delete/{id}
+public async Task<IActionResult> Delete(int id)
+{
+    var actor = await _service.GetByIdAsync(id);
+
+    if (actor == null)
+    {
+        return NotFound();
+    }
+
+    return View(actor);
+}
+
+// POST: Actors/Delete/{id}
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> DeleteConfirmed(int id)
+{
+    await _service.DeleteAsync(id);
+    return RedirectToAction(nameof(Index));
+}
+// GET: Actors/Edit/{id}
+public async Task<IActionResult> Edit(int id)
+{
+    var actor = await _service.GetByIdAsync(id);
+
+    if (actor == null)
+    {
+        return NotFound();
+    }
+
+    return View(actor);
+}
+
+// POST: Actors/Edit/{id}
+[HttpPost]
+[ValidateAntiForgeryToken]
+public async Task<IActionResult> Edit(int id, [Bind("Id, FullName, ProfilePictureUrl, Bio")] Actor actor)
+{
+    if (id != actor.Id)
+    {
+        return NotFound();
+    }
+
+    if (!ModelState.IsValid)
+    {
+        return View(actor);
+    }
+
+    try
+    {
+        await _service.UpdateAsync(id, actor);
+    }
+    catch (Exception)
+    {
+        return NotFound();
+    }
+
+    return RedirectToAction(nameof(Index));
+}
+
 
     }
 }
