@@ -7,11 +7,11 @@ namespace eTickets.Data.Services
 {
     public interface IActorsService
     {
-Task<IEnumerable<Actor>> getAll();
+Task<IEnumerable<Actor>> GetAllAsync();
 //to get the actor by id
-Actor GetById(int Id);
+Task<Actor?> GetByIdAsync(int Id);
 //to add the actor in database
-void Add(Actor actor);
+Task AddAsync(Actor actor);
 //to update the actor
 Actor Update(int id,Actor newActor);
 //to delete the actor
