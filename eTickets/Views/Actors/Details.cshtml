@@ -1,58 +1,28 @@
-@* @model Actor
-
-@{
-    ViewData["Title"] = "Actor Details";
-}
-
-<div class="row">
-    <div class="col-md-6 offset-md-3">
-       
-        <div class="mb-3">
-            <img id="ProfilePicturePreview" src="@Model.ProfilePictureUrl" alt="@Model.FullName" class="img-fluid" style="max-width: 300px;" />
-        </div>
-         <h1>@Model.FullName</h1>
-        <div class="mb-3">
-            <h4>Bio:</h4>
-            <p>@Model.Bio</p>
-        </div>
-        <a asp-action="Index" class="btn btn-outline-primary">Back to List</a>
-    </div>
-</div>
-
-@section Scripts {
-    <script>
-        $(document).ready(function() {
-            var profilePictureUrl = "@Model.ProfilePictureUrl";
-            var output = document.getElementById('ProfilePicturePreview');
-            output.src = profilePictureUrl;
-        });
-    </script>
-} *@
 @model Actor
 @{
-    ViewData["title"] = "Actor Details";
+    ViewData["title"] = "Add a new actor";
 }
 
 <div class="row-text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Actor Details</h1>
+            <h1>Details of  actor</h1>
         </p>
         <div class="row">
             <div class="col-md-8 offset-2">
-                
+                <form asp-action="Create" >
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <div class="form-group text-center">
                         <img id="ProfilePicturePreview" style="max-width: 200px; max-height: 200px;" />
                     </div>
                     <div class="form-group">
                         <label asp-for="ProfilePictureUrl" class="control-label"></label>
-                        <input asp-for="ProfilePictureUrl"  class="form-control" readonly/>
+                        <input asp-for="ProfilePictureUrl"  class="form-control" />
                         <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="FullName" class="control-label"></label>
-                        <input asp-for="FullName" class="form-control" readonly/>
+                        <input asp-for="FullName" class="form-control" />
                         <span asp-validation-for="FullName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
@@ -61,10 +31,10 @@
                         <span asp-validation-for="Bio" class="text-danger"></span>
                     </div>
                     <div class="form-group d-flex justify-content-between">
-                        <input type="submit" value="Edit" class="btn btn-outline-success mt-3" />
+                        <input type="submit" value="Edit" class="btn btn-outline-success mt-3" asp-action="Edit" asp-route-id="@Model.Id"/>
                         <a class="btn btn-outline-secondary mt-3" asp-action="Index">Back to List</a>
                     </div>
-               
+                </form>
             </div>
         </div>
     </div>
@@ -76,6 +46,9 @@
  var output = document.getElementById('ProfilePicturePreview');
   output.src = $("#ProfilePictureUrl").val();
         })
-       
+        $("#ProfilePictureUrl").on("change", function(){
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        })
     </script>
 }

@@ -1,0 +1,48 @@
+@model Actor
+
+<h1>Edit Actor</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="FullName">Full Name</label>
+        <input asp-for="FullName" class="form-control" />
+        <span asp-validation-for="FullName" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProfilePictureUrl">Profile Picture URL</label>
+        <input asp-for="ProfilePictureUrl" class="form-control" />
+        <span asp-validation-for="ProfilePictureUrl" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <img id="ProfilePicturePreview" src="@Model.ProfilePictureUrl" alt="Profile Picture" style="max-width: 300px;" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Bio">Bio</label>
+        <textarea asp-for="Bio" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Bio" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $("#ProfilePictureUrl").val();
+        })
+        $("#ProfilePictureUrl").on("change", function () {
+            var output = document.getElementById('ProfilePicturePreview');
+            output.src = $(this).val();
+        })
+    </script>
+}
