@@ -43,11 +43,12 @@ public async Task<IActionResult> Details(int id)
 
     if (actor == null)
     {
-        return NotFound();
+        return RedirectToAction("NotFound", "Actors");
     }
 
     return View(actor);
 }
+
 // GET: Actors/Delete/{id}
 public async Task<IActionResult> Delete(int id)
 {
@@ -76,7 +77,7 @@ public async Task<IActionResult> Edit(int id)
 
     if (actor == null)
     {
-        return NotFound();
+        return View("NotFound");
     }
 
     return View(actor);
@@ -108,6 +109,11 @@ public async Task<IActionResult> Edit(int id, [Bind("Id, FullName, ProfilePictur
 
     return RedirectToAction(nameof(Index));
 }
+public new IActionResult NotFound()
+{
+    return View();
+}
+
 
 
     }
