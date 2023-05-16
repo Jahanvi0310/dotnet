@@ -33,7 +33,17 @@ namespace eTickets.Data.Services
 }
 
 
-       
+        public async Task<IEnumerable<Actor>> GetAllAsync()
+        {
+            var result = await _context.Actors!.ToListAsync();
+            return result;
+        }
+
+        public async Task<Actor?> GetByIdAsync(int id)
+        {
+            var result = await _context.Actors!.FirstOrDefaultAsync(n => n.Id == id);
+            return result;
+        }
 
        public async Task UpdateAsync(int id, Actor newActor)
         {
