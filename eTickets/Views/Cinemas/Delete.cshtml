@@ -1,0 +1,35 @@
+@model eTickets.Models.Cinema
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h1>Confirm Delete</h1>
+
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h4>Are you sure you want to delete this cinema?</h4>
+                    <hr />
+
+                    <div class="text-center">
+                        <h5>Cinema details:</h5>
+                        <img src="@Model.Logo" alt="Cinema Logo" class="img-thumbnail mb-3" style="max-width: 300px;" />
+                        <dl class="row">
+                            <dt class="col-sm-4">Name:</dt>
+                            <dd class="col-sm-8">@Model.Name</dd>
+                            <dt class="col-sm-4">Description:</dt>
+                            <dd class="col-sm-8">@Model.Description</dd>
+                            <!-- Include other properties here -->
+                        </dl>
+                    </div>
+
+                    <form asp-action="DeleteConfirmed" asp-route-id="@Model.Id" method="post">
+                        <div class="text-center">
+                            <input type="submit" value="Delete" class="btn btn-danger" />
+                            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

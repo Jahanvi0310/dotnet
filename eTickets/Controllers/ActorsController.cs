@@ -17,6 +17,7 @@ public ActorsController(IActorsService service)
         {
             //to show the data on index page
             var data =await _service.GetAllAsync();
+          
             return View(data);
         }
         //url for creating the actor 
