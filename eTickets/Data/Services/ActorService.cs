@@ -4,58 +4,19 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using eTickets.Models;
 using Microsoft.EntityFrameworkCore;
-
+using eTickets.Data.Base;
 namespace eTickets.Data.Services
 {
-    public class ActorsService : IActorsService
+    public class ActorsService :EntityBaseRepository<Actor>,IActorsService
     {
-        private readonly AppDbContext _context;
+       
 
-        public ActorsService(AppDbContext context)
+        public ActorsService(AppDbContext context):base(context)
+        
         {
-            _context = context;
-        }
 
-        public async Task AddAsync(Actor actor)
-        {
-            await _context.Actors!.AddAsync(actor);
-            await _context.SaveChangesAsync();
-        }
-
-       public async Task DeleteAsync(int id)
-{
-    var actor = await _context.Actors!.FindAsync(id);
-    if (actor != null)
-    {
-        _context.Actors.Remove(actor);
-        await _context.SaveChangesAsync();
-    }
-}
-
-
-        public async Task<IEnumerable<Actor>> GetAllAsync()
-        {
-            var result = await _context.Actors!.ToListAsync();
-            return result;
-        }
-
-        public async Task<Actor?> GetByIdAsync(int id)
-        {
-            var result = await _context.Actors!.FirstOrDefaultAsync(n => n.Id == id);
-            return result;
-        }
-
-       public async Task UpdateAsync(int id, Actor newActor)
-        {
-            var actor = await _context.Actors!.FindAsync(id);
-            if (actor != null)
-            {
-                actor.FullName = newActor.FullName;
-                actor.ProfilePictureUrl = newActor.ProfilePictureUrl;
-                actor.Bio = newActor.Bio;
-
-                await _context.SaveChangesAsync();
-            }
         }
     }
+
+        
 }
