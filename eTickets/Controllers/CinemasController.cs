@@ -13,20 +13,21 @@ namespace eTickets.Controllers
   private readonly ICinemasService _service;
 public CinemasController(ICinemasService service)
 {
-    _service=service;
+    _service = service;
 }
 public async Task<IActionResult> Index()
-{
-    var cinemas = await _service.GetAllAsync();
-    return View(cinemas);
-}
+        {
+            //to show the data on index page
+            var data =await _service.GetAllAsync();
+            return View(data);
+        }
         //GET://Actors/Create
         public IActionResult Create()
         {
             return View();
         }
         [HttpPost]
-public async Task<IActionResult> Create([Bind("FullName,ProfilePictureUrl,Bio")] Cinema cinema)
+public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Cinema cinema)
 {
     if (!ModelState.IsValid)
     {
@@ -34,30 +35,31 @@ public async Task<IActionResult> Create([Bind("FullName,ProfilePictureUrl,Bio")]
     }
 
      await _service.AddAsync(cinema);
+     
 
     return RedirectToAction(nameof(Index));
 }
 public async Task<IActionResult> Details(int id)
 {
-    var Cinema = await _service.GetByIdAsync(id);
+    var cinema= await _service.GetByIdAsync(id);
 
-    if (Cinema == null)
+    if (cinema == null)
     {
         return RedirectToAction("NotFound", "Cinemas");
     }
 
-    return View(Cinema);
+    return View(cinema);
 }
 public async Task<IActionResult> Delete(int id)
 {
-    var Cinema = await _service.GetByIdAsync(id);
+    var cinema = await _service.GetByIdAsync(id);
 
-    if (Cinema == null)
+    if (cinema == null)
     {
         return NotFound();
     }
 
-    return View(Cinema);
+    return View(cinema);
 }
 [HttpPost]
 [ValidateAntiForgeryToken]
@@ -68,34 +70,34 @@ public async Task<IActionResult> DeleteConfirmed(int id)
 }
 public async Task<IActionResult> Edit(int id)
 {
-    var actor = await _service.GetByIdAsync(id);
+    var cinema = await _service.GetByIdAsync(id);
 
-    if (actor == null)
+    if (cinema == null)
     {
         return View("NotFound");
     }
 
-    return View(actor);
+    return View(cinema);
 }
 
 // POST: Actors/Edit/{id}
 [HttpPost]
 [ValidateAntiForgeryToken]
-public async Task<IActionResult> Edit(int id, [Bind("Id, FullName, ProfilePictureUrl, Bio")] Cinema Cinema)
+public async Task<IActionResult> Edit(int id, [Bind("Id,Logo,Name,Description")] Cinema cinema)
 {
-    if (id != Cinema.Id)
+    if (id != cinema.Id)
     {
         return NotFound();
     }
 
     if (!ModelState.IsValid)
     {
-        return View(Cinema);
+        return View(cinema);
     }
 
     try
     {
-        await _service.UpdateAsync(id, Cinema);
+        await _service.UpdateAsync(id, cinema);
     }
     catch (Exception)
     {
