@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Linq.Expressions;
+
 
 namespace eTickets.Data.Base
 {
@@ -22,6 +24,12 @@ namespace eTickets.Data.Base
             await _context.SaveChangesAsync();
             return result;
             
+        }
+        public async Task<IEnumerable<T>> GetAllAsync(params Expression<Func <T,object> >[] includeProperties)
+        {
+           IQueryable<T> query= _context.Set<T>();
+           query=includeProperties.Aggregate(query,(current,includeProperty)=>current.Include(includeProperty));
+           return await query.ToListAsync();
         }
 
         public async Task<T> GetByIdAsync(int id)

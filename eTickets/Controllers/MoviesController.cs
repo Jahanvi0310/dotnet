@@ -3,20 +3,40 @@ using System.Diagnostics;
 using  eTickets.Models;
 using Microsoft.EntityFrameworkCore;
 using eTickets.Data;
+using eTickets.Data.Services;
 namespace eTickets.Controllers
 {
     public class MoviesController:Controller
     {
-        private readonly AppDbContext _context;
-public MoviesController(AppDbContext context)
+       private readonly IMoviesService _service;
+public MoviesController(IMoviesService service)
 {
-    _context=context;
+    _service = service;
 }
-        public async Task <IActionResult> Index()
-        {
-            //to show the data on index page
-            var data = await _context.Movies!.Include(n=>n.Cinema).OrderBy(n=>n.Name).ToListAsync();
-            return View(data);
-        }
+public async Task<IActionResult> Index()
+{
+    var data = await _service.GetAllAsync(n => n.Cinema!);
+
+    if (data != null)
+    {
+        return View(data);
+    }
+    else
+    {
+        return NotFound();
+    }
+}
+public async Task<IActionResult> Details(int id)
+{
+    var movie = await _service.GetMovieByIdAsync(id);
+    if (movie == null)
+    {
+        return NotFound();
+    }
+
+    return View(movie);
+}
+
+ 
     }
 }
