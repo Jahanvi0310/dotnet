@@ -36,6 +36,13 @@ public async Task<IActionResult> Details(int id)
 
     return View(movie);
 }
+#pragma warning disable CS1998
+
+public async Task<IActionResult> Create()
+{
+    return View();
+}
+
 
  
     }

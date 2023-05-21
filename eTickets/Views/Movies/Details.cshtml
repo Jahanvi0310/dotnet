@@ -1,14 +1,17 @@
-@model Movie
+
+@Model <Movie>
 
 @{
-    ViewData["Title"] = "Movie Details";
+    ViewData["Title"] = "Details Movies";
 }
 
 <div class="row">
-    <div class="col-md-8 offset-md-2">
-        <div class="card mb-3" style="max-width: 540px;">
-            <div class="row g-0">
-               <div class="col-md-12">
+   
+    
+                <div class="col-md-4 col-xs-6 border-primary mb-3">
+                    <div class="card mb-3" style="max-width: 540px;">
+        <div class="row g-0">
+            <div class="col-md-12">
         <div class="card-header text-white bg-info">
         <p class="card-text">
             <h5>
@@ -18,14 +21,13 @@
         </p>
         </div>
             </div>
-                <div class="col-md-6">
-                    <img src="@Model.ImageUrl" alt="@Model.Name" width="100%">
-                </div>
-                <div class="col-md-6">
-                    <div class="card-body">
-                        <h5 class="card-title">@Model.Name</h5>
-                        <p class="card-text"><b>Description:</b> @Model.Description</p>
-                        <p class="card-text"><b>Cinema:</b> 
+            <div class="col-md-6" >
+        <img src=@Model.ImageUrl alt=@Model.Name width="100%">
+            </div>
+            <div class="col-md-6">
+        <div class="card-body">
+            <p class="card-text">@Model.Description</p>
+           <p class="card-text"><b>Cinema:</b> 
                         <a asp-controller="Cinemas" asp-action="Details" asp-route-id="@Model.CinemaId">
                             @(Model.Cinema?.Name)
                         </a></p>
@@ -33,55 +35,50 @@
                         <a asp-controller="Producers" asp-action="Details" asp-route-id="@Model.ProducerId">
                             @(Model.Producer?.FullName)
                         </a></p>
-                        <p class="card-text"><b>Category:</b> @Model.MovieCategory</p>
-                        <p class="card-text"><b>Start Date:</b> @Model.StartDate</p>
-                        <p class="card-text"><b>End Date:</b> @Model.EndDate</p>
-                        <p class="card-text">
-                            <b>Status:</b>
-                            @if (DateTime.Now >= Model.StartDate && DateTime.Now <= Model.EndDate)
-                            {
-                                <span class="badge bg-success text-white">AVAILABLE</span>
-                            }
-                            else if (DateTime.Now > Model.EndDate)
-                            {
-                                <span class="badge bg-danger text-white">Expired</span>
-                            }
-                            else
-                            {
-                                <span class="badge bg-success text-white">UPCOMING</span>
-                            }
-                        </p>
-                       
-                        <p class="card-text">
+            <p class="card-text"><b>Category:</b>@Model.MovieCategory</p>
+            <p class="card-text"><b>StartDate:</b>@Model.StartDate</p>
+            <p class="card-text"><b>EndDate:</b>@Model.EndDate</p>
+            <p class="card-text"><b>Status:</b>@if(DateTime.Now >=Model.StartDate && DateTime.Now <=Model.EndDate)
+            {
+                <span class="badge bg-success text-white">AVAILABLE</span>
+            }else if(DateTime.Now > Model.EndDate)
+            {
+                <span class="badge bg-danger text-white">Expired</span>
+            }
+            else{
+                <span class="badge bg-success text-white">UPCOMING</span>
+            }
+            </p>
+        </div>
+            </div>
+            <p class="card-text">
                             <b>Actors:</b>
                             <hr/>
                             <div class="column text-center">
-                                @foreach (var item in Model.Actors_Movies)
+                                @foreach (var Model in Model.Actors_Movies)
                                 {
                                     <div class="col-md-4">
-                                        @if (item.Actor != null)
+                                        @if (Model.Actor != null)
                                         {
                                             <div class="column text-center">
-                                            <img src="@item.Actor.ProfilePictureUrl" style="max-width: 150px;" class="border-info rounded-circle"/>
+                                            <img src="@Model.Actor.ProfilePictureUrl" style="max-width: 150px;" class="border-info rounded-circle"/>
                                             <br/>
-                                            <a asp-action="Details" asp-controller="Actors" asp-route-id="@item.Actor.Id">@item.Actor.FullName</a>
+                                            <a asp-action="Details" asp-controller="Actors" asp-route-id="@Model.Actor.Id">@Model.Actor.FullName</a>
                                             </div>
                                         }
                                     </div>
                                 }
                             </div>
                         </p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-footer d-flex justify-content-end">
-                <a class="btn btn-outline-primary me-auto ms-0" asp-action="Index" >
-                    <i class="bi bi-eye-fill"></i> Back to List
-                </a>
-                <a class="btn btn-success text-white ms-auto me-0">
-                    <i class="bi bi-cart-plus"></i> Add To Cart (price @Model.Price.ToString("c"))
-                </a>
+            <div class="col-md-12">
+                <div class="card-footer d-flex justify-content-end">
+        <a class="btn btn-outline-primary me-auto ms-0" asp-action="Index"><i class="bi bi-eye-fill"></i>Back to List</a>
+        <a class="btn btn-success text-white ms-auto me-0"><i class="bi bi-cart-plus"></i> Add To Cart (price @Model.Price.ToString("c"))</a>
+    </div>
             </div>
         </div>
-    </div>
+                    </div>
+                    </div>
+    
 </div>
+
