@@ -49,11 +49,5 @@
         </div>
     </div>
 
-    <div class="row">
-        <div class="col-md-10 offset-md-1">
-            <a href="@Url.Action("Create", "Producers")" class="btn btn-success float-right" title="Add New Producer">
-                <i class="fas fa-plus-circle"></i> Add New Producer
-            </a>
-        </div>
-    </div>
+    @await Html.PartialAsync("_CreateItem","Producers");
 </div>
