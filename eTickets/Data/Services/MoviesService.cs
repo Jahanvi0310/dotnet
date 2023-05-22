@@ -39,5 +39,40 @@ response.Producers=await _context.Producers!.OrderBy(n=>n.FullName).ToListAsync(
 return response;
 
     }    
+    public async Task<Movie> CreateMovieAsync(NewMovieVM newMovie)
+{
+    // Map the NewMovieVM object to a Movie object
+    var movie = new Movie
+    {
+        Name = newMovie.Name,
+        Description = newMovie.Description,
+        Price = newMovie.Price,
+        ImageUrl = newMovie.ImageUrl,
+        StartDate = newMovie.StartDate,
+        EndDate = newMovie.EndDate,
+        MovieCategory = newMovie.MovieCategory,
+        CinemaId = newMovie.CinemaId,
+        ProducerId = newMovie.ProducerId
+    };
+
+    // Create a list of Actor_Movie objects to associate actors with the movie
+    if (newMovie.ActorIds != null && newMovie.ActorIds.Any())
+    {
+        movie.Actors_Movies = newMovie.ActorIds.Select(actorId => new Actor_Movie
+        {
+            ActorId = actorId,
+            MovieId = movie.Id
+        }).ToList();
+    }
+
+    // Add the movie to the context
+    _context.Movies!.Add(movie);
+
+    // Save the changes to the database
+    await _context.SaveChangesAsync();
+
+    return movie;
+}
+
 }
 }
