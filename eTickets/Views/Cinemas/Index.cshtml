@@ -45,11 +45,5 @@
             </tbody>
         </table>
     </div>
-   <div class="row">
-        <div class="col-md-10 offset-md-1">
-            <a asp-action="Create" class="btn btn-success float-right" title="Add New Actor">
-                <i class="fas fa-plus-circle"></i> Add New
-            </a>
-        </div>
-    </div>
+  @await Html.PartialAsync("_CreateItem","Cinemas");
 </div>

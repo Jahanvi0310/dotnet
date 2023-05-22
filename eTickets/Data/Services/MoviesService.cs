@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using eTickets.Models;
+using eTickets.Data.ViewModels;
 using Microsoft.EntityFrameworkCore;
 
 using eTickets.Data.Base;
@@ -29,5 +30,14 @@ return details!;
         
     }
 
+public async Task<NewMovieDropdownsVM> GetNewMovieDropdownsValues()
+{
+    var response = new NewMovieDropdownsVM();
+    response.Actors = await _context.Actors!.OrderBy(n => n.FullName).ToListAsync();
+response.Cinemas=await _context.Cinemas!.OrderBy(n=>n.Name).ToListAsync();
+response.Producers=await _context.Producers!.OrderBy(n=>n.FullName).ToListAsync();
+return response;
+
     }    
+}
 }
