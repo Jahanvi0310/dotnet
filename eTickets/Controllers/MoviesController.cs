@@ -48,7 +48,30 @@ public async Task<IActionResult> Create()
     ViewBag.ActorIds=new SelectList(movieDropdownsData.Actors,"Id","FullName");
     return View();
 }
-
+[HttpPost]
+public async Task<IActionResult> Create(NewMovieVM newMovie)
+{
+    if (ModelState.IsValid)
+    {
+        var createdMovie = await _service.CreateMovieAsync(newMovie);
+        
+        if (createdMovie != null)
+        {
+            return RedirectToAction("Index");
+        }
+        else
+        {
+            ModelState.AddModelError("", "Failed to create the movie. Please try again.");
+        }
+    }
+    
+    var movieDropdownsData = await _service.GetNewMovieDropdownsValues();
+    ViewBag.Cinemas = new SelectList(movieDropdownsData.Cinemas, "Id", "Name");
+    ViewBag.Producers = new SelectList(movieDropdownsData.Producers, "Id", "FullName");
+    ViewBag.ActorIds = new SelectList(movieDropdownsData.Actors, "Id", "FullName");
+    
+    return View(newMovie);
+}
 
  
     }
