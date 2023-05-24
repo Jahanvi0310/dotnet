@@ -8,6 +8,7 @@ namespace eTickets.Models
     public class NewMovieVM
     {
         [Key]
+      public int Id {get;set;}
       
        [Display(Name ="Name")]
        [Required(ErrorMessage ="Name is required")]
