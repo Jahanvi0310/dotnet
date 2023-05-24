@@ -1,0 +1,113 @@
+@model NewMovieVM;
+
+
+
+<h1>Edit Movie</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name">Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price">Price</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+   <div class="form-group">
+        <label asp-for="ImageUrl">Image URL</label>
+        <input asp-for="ImageUrl" class="form-control" onchange="previewImage(this);" />
+        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+    </div>
+
+    <!-- Image preview section -->
+    <div class="form-group">
+        <label>Image Preview</label>
+        <img id="imagePreview" class="img-thumbnail" style="max-width: 200px; max-height: 200px;" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="StartDate">Start Date</label>
+        <input asp-for="StartDate" class="form-control" type="date" />
+        <span asp-validation-for="StartDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="EndDate">End Date</label>
+        <input asp-for="EndDate" class="form-control" type="date" />
+        <span asp-validation-for="EndDate" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="MovieCategory">Movie Category</label>
+        <select asp-for="MovieCategory" class="form-control">
+            <option value="">Select</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Horror">Horror</option>
+        </select>
+        <span asp-validation-for="MovieCategory" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CinemaId">Cinema</label>
+        <select asp-for="CinemaId" class="form-control" asp-items="ViewBag.Cinemas"></select>
+        <span asp-validation-for="CinemaId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ProducerId">Producer</label>
+        <select asp-for="ProducerId" class="form-control" asp-items="ViewBag.Producers"></select>
+        <span asp-validation-for="ProducerId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="ActorIds">Actors</label>
+        <select asp-for="ActorIds" class="form-control" asp-items="ViewBag.ActorIds" multiple></select>
+        <span asp-validation-for="ActorIds" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+        <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+    </div>
+</form>
+
+@section Scripts {
+    <script>
+        function previewImage(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imagePreview').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                $('#imagePreview').attr('src', '');
+            }
+        }
+
+        // Load the image preview on page load if an image URL is already set
+        $(document).ready(function () {
+            var imageUrl = '@Model.ImageUrl';
+            if (imageUrl) {
+                $('#imagePreview').attr('src', imageUrl);
+            }
+        });
+    </script>
+}
