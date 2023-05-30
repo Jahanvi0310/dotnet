@@ -1,5 +1,4 @@
 @using eTickets.Data.ViewModels
-
 @model ShoppingCartVM
 
 @{
@@ -12,7 +11,7 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>SelectedAmount</th>
+                <th>Selected Amount</th>
                 <th>Movie</th>
                 <th>Price</th>
                 <th>Total</th>
@@ -26,14 +25,17 @@
                 {
                     <tr>
                         <td>@item.Amount</td>
-                        <td>@item.Movie?.Name</td>
+                        <td>
+                            <!-- Display movie name as a link to view component -->
+                            <a href="@Url.Action("Details", "Movies", new { id = item.Movie!.Id })">
+                                @item.Movie?.Name
+                            </a>
+                        </td>
                         <td>$@item.Movie?.Price.ToString("C")</td>
-                       
                         <td>$@(item.Movie?.Price * item.Amount).ToString("C")</td>
                         <td>
-                            <form asp-action="RemoveFromCart" asp-controller="Orders" method="post">
-                                <input type="hidden" name="movieId" value="@item.Movie?.Id" />
-                                <button type="submit" class="btn btn-danger">Remove</button>
+                            <form asp-controller="Orders" asp-action="RemoveFromShoppingCart" asp-route-id="@item.Movie!.Id" method="post">
+                                <button type="submit" class="btn btn-danger">Remove from Cart</button>
                             </form>
                         </td>
                     </tr>

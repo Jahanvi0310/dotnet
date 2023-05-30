@@ -173,5 +173,6 @@ public async Task<IActionResult> Filter(string searchString)
     }
     return View("Index",allMovies);
 }
+
     }
 }
