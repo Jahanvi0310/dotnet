@@ -1,0 +1,55 @@
+@using eTickets.Data.ViewModels
+
+@model ShoppingCartVM
+
+@{
+    ViewData["Title"] = "Shopping Cart Summary";
+}
+
+<h1 class="text-center mb-4">Shopping Cart</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>SelectedAmount</th>
+                <th>Movie</th>
+                <th>Price</th>
+                <th>Total</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ShoppingCart?.ShoppingCartItems != null)
+            {
+                @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
+                {
+                    <tr>
+                        <td>@item.Amount</td>
+                        <td>@item.Movie?.Name</td>
+                        <td>$@item.Movie?.Price.ToString("C")</td>
+                       
+                        <td>$@(item.Movie?.Price * item.Amount).ToString("C")</td>
+                        <td>
+                            <form asp-action="RemoveFromCart" asp-controller="Orders" method="post">
+                                <input type="hidden" name="movieId" value="@item.Movie?.Id" />
+                                <button type="submit" class="btn btn-danger">Remove</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="3"></td>
+                <td><strong>Total:</strong></td>
+                <td class="text-primary">$@Model.ShoppingCartTotal</td>
+            </tr>
+        </tfoot>
+    </table>
+</div>
+
+<div class="text-center">
+    <a href="/Orders/Checkout" class="btn btn-primary btn-lg">Checkout</a>
+</div>
