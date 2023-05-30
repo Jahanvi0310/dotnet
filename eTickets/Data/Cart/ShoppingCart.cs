@@ -12,57 +12,66 @@ namespace eTickets.Data.Cart
 {
     public class ShoppingCart
     {
- public AppDbContext _context{get;set;}
- public string?ShoppingCartId{get;set;}
- public List<ShoppingCartItem>?ShoppingCartItems{get;set;}
-   public ShoppingCart(AppDbContext? context)
-{
-    _context = context ?? throw new ArgumentNullException(nameof(context));
-}
+        public AppDbContext _context { get; set; }
+        public string ?ShoppingCartId { get; set; }
+        public List<ShoppingCartItem> ?ShoppingCartItems { get; set; }
 
-   public static ShoppingCart GetShoppingCart(IServiceProvider services)
-{
-    ISession ?session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext?.Session;
-    var context = services.GetService<AppDbContext>();
+        public ShoppingCart(AppDbContext context)
+        {
+            _context = context ?? throw new ArgumentNullException(nameof(context));
+        }
 
-    string cartId = session?.GetString("CartId") ?? Guid.NewGuid().ToString();
-    session?.SetString("CartId", cartId);
+        public static ShoppingCart GetShoppingCart(IServiceProvider services)
+        {
+            ISession ?session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext?.Session;
+            var context = services.GetService<AppDbContext>();
 
-    return new ShoppingCart(context!) { ShoppingCartId = cartId };
-}
+            string cartId = session?.GetString("CartId") ?? Guid.NewGuid().ToString();
+            session?.SetString("CartId", cartId);
 
+            return new ShoppingCart(context!) { ShoppingCartId = cartId };
+        }
 
-   public List<ShoppingCartItem> GetShoppingCartItems()
-{
-    return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCartItems!
-        .Where(n => n.ShoppingCartId == ShoppingCartId)
-        .Include(n => n.Movie)
-        .ToList());
-}
-public double GetShoppingCartTotal() => _context.ShoppingCartItems!.Where(n=>n.ShoppingCartId==ShoppingCartId).Select(n=>n.Movie!.Price * n.Amount).Sum();
-public void AddItem(Movie movie, int amount)
+        public List<ShoppingCartItem> GetShoppingCartItems()
+        {
+            return ShoppingCartItems ?? (ShoppingCartItems = _context.ShoppingCartItems!
+                .Where(n => n.ShoppingCartId == ShoppingCartId)
+                .Include(n => n.Movie)
+                .ToList());
+        }
+
+        public double GetShoppingCartTotal()
+        {
+            return _context.ShoppingCartItems!
+                .Where(n => n.ShoppingCartId == ShoppingCartId)
+                .Select(n => n.Movie!.Price * n.Amount)
+                .Sum();
+        }
+
+        public void AddItemToCart(Movie movie)
         {
             var shoppingCartItem = _context.ShoppingCartItems!
-                .SingleOrDefault(n => n.Movie!.Id == movie.Id && n.ShoppingCartId == ShoppingCartId);
+                .FirstOrDefault(n => n.Movie!.Id == movie.Id && n.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem == null)
             {
-                //if it is null new shopping cartitem is created 
-                shoppingCartItem = new ShoppingCartItem
+                shoppingCartItem = new ShoppingCartItem()
                 {
+                    ShoppingCartId = ShoppingCartId!,
                     Movie = movie,
-                    Amount = amount,
-                    ShoppingCartId = ShoppingCartId!
+                    Amount = 1
+                    
                 };
                 _context.ShoppingCartItems!.Add(shoppingCartItem);
             }
             else
             {
-                shoppingCartItem.Amount += amount;
+                shoppingCartItem.Amount++;
             }
 
             _context.SaveChanges();
         }
+
         public void RemoveFromCart(Movie movie)
         {
             var shoppingCartItem = _context.ShoppingCartItems!
@@ -70,21 +79,17 @@ public void AddItem(Movie movie, int amount)
 
             if (shoppingCartItem != null)
             {
-               if(shoppingCartItem.Amount>1)
-               {
-                shoppingCartItem.Amount --;
-               }
-            else
-            {
-                 _context.ShoppingCartItems!.Remove(shoppingCartItem);
+                if (shoppingCartItem.Amount > 1)
+                {
+                    shoppingCartItem.Amount--;
+                }
+                else
+                {
+                    _context.ShoppingCartItems!.Remove(shoppingCartItem);
+                }
             }
-            }
-           
 
             _context.SaveChanges();
-
         }
     }
-   
-    
 }
