@@ -1,11 +1,12 @@
 using Microsoft.EntityFrameworkCore;
-
 using Microsoft.Extensions.Configuration;
 using MySqlConnector;
 using eTickets.Models;
 using eTickets.Data;
 using eTickets.Data.Services;
 using Microsoft.Extensions.DependencyInjection;
+using eTickets.Data.Cart;
+using Microsoft.AspNetCore.Http;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = new ConfigurationBuilder()
@@ -26,21 +27,22 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     {
         Console.WriteLine(ex.Message);
     }
-    
 });
-builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IActorsService,ActorsService>();
-builder.Services.AddScoped<IProducersService,ProducersService>();
-builder.Services.AddScoped<ICinemasService,CinemasService>();
-builder.Services.AddScoped<IMoviesService,MoviesService>();
 
+builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IActorsService, ActorsService>();
+builder.Services.AddScoped<IProducersService, ProducersService>();
+builder.Services.AddScoped<ICinemasService, CinemasService>();
+builder.Services.AddScoped<IMoviesService, MoviesService>();
+builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSession();
 var app = builder.Build();
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-
     SeedData.Initialize(services);
-    
 }
 
 // Configure the HTTP request pipeline.
@@ -53,16 +55,11 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
-
+app.UseSession();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-    //Seed the database after and app start
-    //if there is no database it will add it
- 
 
 app.Run();
