@@ -33,16 +33,18 @@ namespace eTickets.Controllers
             };
             return View(response);
         }
-       public async Task<RedirectToActionResult> AddToShoppingCart(int id)
-       {
-        var item=await _moviesService.GetMovieByIdAsync(id);
-        if(item!=null)
-        {
-            _shoppingCart.AddItemToCart(item);
+      public async Task<RedirectToActionResult> AddToShoppingCart(int id)
+{
+    var item = await _moviesService.GetMovieByIdAsync(id);
+    if (item != null)
+    {
+        _shoppingCart.AddItemToCart(item);
+        var cartItemCount = _shoppingCart.GetShoppingCartItems().Sum(n => n.Amount);
+        HttpContext.Session.SetInt32("CartItemCount", cartItemCount);
+    }
+    return RedirectToAction("Index", "Orders");
+}
 
-        }
-        return RedirectToAction("Index","Orders");
-       }
        public async Task<RedirectToActionResult> RemoveFromShoppingCart(int id)
 {
     var item = await _moviesService.GetMovieByIdAsync(id);
