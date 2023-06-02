@@ -18677,6 +18677,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/Views/Orders/AllOrder.cshtml",
+      "TargetPath": "Views\\Orders\\AllOrder.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/Views/Shared/_Layout.cshtml",
       "TargetPath": "Views\\Shared\\_Layout.cshtml",
       "FileKind": "mvc"
