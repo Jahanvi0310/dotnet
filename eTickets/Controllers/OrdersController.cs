@@ -65,5 +65,11 @@ public async Task<IActionResult> CompletedOrder()
     await _shoppingCart.ClearShoppingCartAsync();
     return View("OrderCompleted");
 }
+public async Task <IActionResult> AllOrder()
+{
+    string userId="";
+var orders=await _orderService.GetOrdersByUserIdAsync(userId);
+return View(orders);
+}
     }
 }
