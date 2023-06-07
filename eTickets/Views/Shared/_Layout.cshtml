@@ -65,20 +65,25 @@
         <a class="nav-link" asp-controller="Account" asp-action="Register">  <i class="bi bi-person-plus"></i> Register</a>
     </li>
     @await Component.InvokeAsync("ShoppingCartSummary")
+      
 </ul>
 
 @*user details*@
 <div class="dropdown">
     <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-bs-toggle="dropdown" aria-expanded="false">
-        <i class="bi bi-person-badge"></i>Hello User
+        <i class="bi bi-person-badge"></i>Hello @User.Identity!.Name
     </button>
     <ul class="dropdown-menu" aria-labelledby="profile-btn">
-        <li>
+        
             <a class="dropdown-item" asp-controller="Orders" asp-action="AllOrder">
                 <i class="bi bi-list"></i>Orders
             </a>
+         
+          <a class="dropdown-item" href="/Account/Login">Logout</a>
         </li>
+
     </ul>
+ 
 </div>
 
                 </div>

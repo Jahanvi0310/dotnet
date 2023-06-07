@@ -1,9 +1,11 @@
-@using eTickets.Data.ViewModels
-@model LoginViewModel
-
-
+@using eTickets.Data.ViewModels;
+@model LoginViewModel;
 
 <h2>Login</h2>
+@if (TempData["LogoutMessage"] != null)
+{
+    <div class="alert alert-success">@TempData["LogoutMessage"]</div>
+}
 
 <form asp-action="Login">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
