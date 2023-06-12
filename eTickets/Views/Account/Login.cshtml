@@ -1,10 +1,19 @@
-@using eTickets.Data.ViewModels;
-@model LoginViewModel;
+@using eTickets.Data.ViewModels
+@model LoginViewModel
 
 <h2>Login</h2>
-@if (TempData["LogoutMessage"] != null)
+@if (TempData["Error"] != null)
 {
-    <div class="alert alert-success">@TempData["LogoutMessage"]</div>
+    <div class="col-md-12 alert alert-danger">
+        <span><b>Sorry!</b> - @TempData["Error"]</span>
+    </div>
+}
+
+@if (TempData["Message"] != null)
+{
+    <div class="col-md-12 alert alert-success">
+        <span>@TempData["Message"]</span>
+    </div>
 }
 
 <form asp-action="Login">

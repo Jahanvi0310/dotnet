@@ -9,6 +9,7 @@ using eTickets.Data.Cart;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using eTickets.Data.Static;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = new ConfigurationBuilder()
@@ -44,23 +45,23 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession();
-builder.Services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddCookie(options =>
-            {
-                options.LoginPath = "/Account/Login"; // Customize the login path
-                options.LogoutPath = "/Account/Logout"; // Customize the logout path
-            });
+
 var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     SeedData.Initialize(services);
+    var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
+
+    // Add role "USER" if it doesn't exist
+    var roleExists = await roleManager.RoleExistsAsync(UserRoles.User);
+    if (!roleExists)
+    {
+        var role = new IdentityRole(UserRoles.User);
+        await roleManager.CreateAsync(role);
+    }
+
 }
 
 // Configure the HTTP request pipeline.

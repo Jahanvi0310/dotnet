@@ -107,3 +107,11 @@
 /Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
 /Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.IdentityModel.Tokens.dll
 /Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/System.IdentityModel.Tokens.Jwt.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.AspNetCore.Razor.Language.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.CodeAnalysis.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.CodeAnalysis.CSharp.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Microsoft.CodeAnalysis.Razor.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Newtonsoft.Json.dll
+/Users/pulkitanand/Desktop/dotnet-ecommerce/eTickets/bin/Debug/net7.0/Newtonsoft.Json.Bson.dll
