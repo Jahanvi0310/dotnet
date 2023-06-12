@@ -120,7 +120,7 @@ public async Task<IActionResult> Login(LoginViewModel loginViewModel)
             {
                 // Customize the behavior after successful login
                 TempData["Message"] = "Login successful!";
-                return View("Index","Movies");
+                return RedirectToAction("Index","Movies");
             }
             else
             {
